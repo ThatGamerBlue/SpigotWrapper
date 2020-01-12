@@ -47,6 +47,16 @@ public class Logger
 		}
 	}
 
+	public void printLicense()
+	{
+		System.out.println("\tSpigotWrapper  Copyright (C) 2020  ThatGamerBlue");
+		System.out.println("\tThis program comes with ABSOLUTELY NO WARRANTY,");
+		System.out.println("\tThis is free software, and you are welcome to redistribute it");
+		System.out.println("\tunder certain conditions.");
+		System.out.println("\tSee https://www.gnu.org/licenses/ for details");
+		System.out.println("\tAlternatively, see LICENSE in the root of this jar file.\n");
+	}
+
 	public void debug(final String fmt, final Object... objs)
 	{
 		if (Globals.getOptions().getLoggingLevel() >= LEVEL_DEBUG)

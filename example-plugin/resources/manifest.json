@@ -1,0 +1,6 @@
+{
+  "name": "Example Mixin Plugin",
+  "author": "ThatGamerBlue",
+  "version": "1.0.0",
+  "main_class": "com.thatgamerblue.exampleplugin.Main"
+}

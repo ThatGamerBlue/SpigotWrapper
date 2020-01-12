@@ -40,6 +40,7 @@ public class Main
 	@SneakyThrows
 	public static void main(final String[] args)
 	{
+		Globals.getLogger().printLicense();
 		checkWindowsVersion();
 		AnsiConsole.systemInstall();
 		try
