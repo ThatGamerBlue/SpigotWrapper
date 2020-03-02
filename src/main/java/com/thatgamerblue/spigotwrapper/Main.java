@@ -25,7 +25,6 @@ import com.thatgamerblue.spigotwrapper.util.Globals;
 import com.thatgamerblue.spigotwrapper.util.Logger;
 import lombok.SneakyThrows;
 import org.fusesource.jansi.AnsiConsole;
-
 import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
@@ -43,9 +42,23 @@ public class Main
 		Globals.getLogger().printLicense();
 		checkWindowsVersion();
 		AnsiConsole.systemInstall();
+		boolean hasNogui = false;
+		for (String arg : args)
+		{
+			hasNogui |= arg.equals("nogui");
+		}
+		String[] newArgs = new String[hasNogui ? args.length - 1 : args.length];
+		int i = 0;
+		for (String arg : args)
+		{
+			if (!arg.equalsIgnoreCase("nogui"))
+			{
+				newArgs[i++] = arg;
+			}
+		}
 		try
 		{
-			optionParser.parse(args);
+			optionParser.parse(newArgs);
 		}
 		catch (ParameterException ex)
 		{
@@ -108,6 +121,10 @@ public class Main
 		newProcessArgs.add("-jar");
 		newProcessArgs.add(finalJar.getAbsolutePath());
 		newProcessArgs.addAll(Globals.getOptions().getSpigotArguments());
+		if (hasNogui)
+		{
+			newProcessArgs.add("nogui");
+		}
 		Globals.getLogger().debug("Running command: %s", Strings.join(" ", newProcessArgs));
 		System.out.printf("%n-------- SPIGOT START --------%n%n");
 		final ProcessBuilder pb = new ProcessBuilder(newProcessArgs).inheritIO();
@@ -142,7 +159,8 @@ public class Main
 			{
 				return;
 			}
-			Globals.getLogger().fatalUnformatted("Windows XP and below are not supported - update to a later version to use this program.");
+			Globals.getLogger().fatalUnformatted(
+				"Windows XP and below are not supported - update to a later version to use this program.");
 			System.exit(-1);
 		}
 	}
