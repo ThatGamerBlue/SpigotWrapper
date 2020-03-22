@@ -30,7 +30,8 @@ public class Main extends Plugin implements Opcodes
 	public byte[] onClassLoaded(byte[] bytes, String fullClassName)
 	{
 		if (fullClassName.startsWith("net.minecraft.server"))
-		{if (fullClassName.endsWith("EntitySlime"))
+		{
+			if (fullClassName.endsWith("EntitySlime"))
 			{
 				return (new EntitySlimeAugmentor(bytes, fullClassName)).run();
 			}
